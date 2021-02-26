@@ -27,6 +27,7 @@ jobs:
           REVIEWERS: "hoge" # edit here
         run: |
           echo ${{ github.event_path }}
+          echo $(cat ${{ github.event_path }})
           reviewer_count=$(cat ${{ github.event_path }} | jq '.pull_request.requested_reviewers | length')
           if [[ 0 == $reviewer_count ]]; then
             reviewers=$(echo "\"${REVIEWERS// /}\"" | jq 'split(",") | .-["${{ github.actor }}"]')
